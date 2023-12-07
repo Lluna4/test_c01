@@ -13,13 +13,13 @@ cd test_c01
 # Clone the gtest repository
 git clone $GTEST_REPO_URL
 
-# Build gtest
-mkdir googletest/build
-cd googletest/build
-cmake ..
-make
+# Compile gtest
+cd googletest/googletest
+g++ -isystem . -Iinclude -pthread -c src/gtest-all.cc
+ar -rv libgtest.a gtest-all.o
 cd ../..
 
+# Compile your code, linking against the gtest libraries and adding the gtest include directory to your include path
 g++ manager.cpp -std=c++17
 
 path=$(realpath a.out)
