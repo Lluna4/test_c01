@@ -14,6 +14,7 @@ int main()
     if (status == 0)
     {
         status = system("./test");
+        status = system("rm ./test");
     }
     return status;
 }
