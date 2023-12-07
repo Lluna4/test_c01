@@ -1,5 +1,5 @@
 #include <iostream>
-#if !__has_include(<gtest/gtest.c>)
+#if !__has_include(<gtest/gtest.h>)
 #define NO_GTEST
 #endif
 
