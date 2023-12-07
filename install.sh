@@ -14,15 +14,12 @@ cd test_c01
 git clone $GTEST_REPO_URL
 
 # Compile gtest
-cd googletest/googletest
-g++ -isystem . -Iinclude -pthread -c src/gtest-all.cc
+cd googletest
+g++ -isystem googletest/include -Igoogletest -pthread -c googletest/src/gtest-all.cc
 ar -rv libgtest.a gtest-all.o
-cd ../..
+cd ..
 
-# Compile your code, linking against the gtest libraries and adding the gtest include directory to your include path
-g++ manager.cpp -std=c++17
-
-path=$(realpath a.out)
+path=$(realpath test_c01)
 if [ -z "$path" ]; then
     echo "path is not set or is empty"
     exit 1
