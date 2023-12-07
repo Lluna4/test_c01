@@ -20,7 +20,6 @@ cmake ..
 make
 cd ../..
 
-# Compile your code, linking against the gtest libraries and adding the gtest include directory to your include path
 g++ manager.cpp -std=c++17
 
 path=$(realpath a.out)
