@@ -13,13 +13,16 @@ cd test_c01
 # Clone the gtest repository
 git clone $GTEST_REPO_URL
 
-# Compile gtest
-cd googletest
-g++ -isystem googletest/include -Igoogletest -pthread -c googletest/src/gtest-all.cc
-ar -rv libgtest.a gtest-all.o
-cd ..
+# Build gtest
+mkdir googletest/build
+cd googletest/build
+cmake ..
+make
+cd ../..
 
-path=$(realpath test_c01)
+g++ manager.cpp -std=c++17
+
+path=$(realpath a.out)
 if [ -z "$path" ]; then
     echo "path is not set or is empty"
     exit 1

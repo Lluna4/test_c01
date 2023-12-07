@@ -10,7 +10,7 @@ int main()
         exit(1);
     #endif
     int status = 0;
-    status = system("g++ test.cpp manager.cpp -std=c++17 -Igoogletest/googletest/include -Lgoogletest -lgtest -pthread -o test");
+    status = system("g++ -Wall -g -Igoogletest/googletest/include -Lgoogletest/build/lib -lgtest -lgtest_main -pthread -std=c++17 -o test");
     if (status == 0)
     {
         status = system("./test");
