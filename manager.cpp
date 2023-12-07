@@ -10,7 +10,7 @@ int main()
         exit(1);
     #endif
     int status = 0;
-    status = system("g++ -Wall -g -pthread $FILE_NAME -lgtest_main  -lgtest -lpthread -std=c++17 -o test");
+    status = system("g++ -Wall -g -pthread test.cpp -lgtest_main  -lgtest -lpthread -std=c++17 -o test");
     if (status == 0)
     {
         status = system("./test");
