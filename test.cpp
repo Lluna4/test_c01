@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <iostream>
 #if __has_include("ft_ft.c")
 #include "ft_ft.c"
 #define FT_FT

@@ -2,12 +2,12 @@
 
 set -e
 
-REPO_URL="https://github.com/carlyjb17/test_c01"
+REPO_URL="https://github.com/Lluna4/test_c01"
 FILE_NAME="test.cpp"
 
 git clone $REPO_URL test_c01
 cd test_c01
-g++ -Wall -g -pthread $FILE_NAME -lgtest_main  -lgtest -lpthread -std=c++17
+g++ manager.cpp -std=c++17
 
 path=$(realpath a.out)
 if [ -z "$path" ]; then
@@ -15,8 +15,8 @@ if [ -z "$path" ]; then
     exit 1
 fi
 
-if ! grep -q "alias search=" $HOME/.bashrc; then
-    echo "alias search=\"$path\"" >> $HOME/.bashrc
+if ! grep -q "alias test_c01=" $HOME/.bashrc; then
+    echo "alias test_c01=\"$path\"" >> $HOME/.bashrc
 fi
 
 if ! grep -q ".bashrc" $HOME/.bash_profile; then
