@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     {
         status = system("./test");
         status = system("rm ./test");
+        status = system("rm test.cpp");
     }
     return status;
 }
