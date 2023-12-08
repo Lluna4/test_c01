@@ -1,16 +1,9 @@
 #include <iostream>
-#if !__has_include(<gtest/gtest.h>)
-#define NO_GTEST
-#endif
 
 int main()
 {
-    #ifdef NO_GTEST
-        std::cout << "No esta gtest instalado en este entorno" << std::endl;
-        exit(1);
-    #endif
     int status = 0;
-    status = system("g++ -Wall -g -Igoogletest/googletest/include -Lgoogletest/build/lib -lgtest -lgtest_main -pthread -std=c++17 -o test");
+    status = system("g++ -std=c++17 test.cpp -o test");
     if (status == 0)
     {
         status = system("./test");

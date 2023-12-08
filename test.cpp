@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <iostream>
 #if __has_include("ft_ft.c")
 #include "ft_ft.c"
 #define FT_FT
@@ -24,146 +24,231 @@
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
 
-#ifdef FT_FT
-TEST(ft_ft_test, test1)
-{	
-	
+template<typename T>
+void bold(T value)
+{
+    std::cout << "\033[1m" << value << "\033[0m\n";
+}
+
+template<typename T>
+void KO(T value)
+{
+    std::cout << "\033[31m" << value << "\033[0m\n";
+}
+
+template<typename T>
+void OK(T value)
+{
+	std::cout << "\033[32m" << value << "\033[0m\n";
+}
+
+int main()
+{
+	#ifdef FT_FT
+		bold("ft_ft");
 		int test = 0;
 		ft_ft(&test);
-		EXPECT_EQ(test, 42);
-
-}
-#else
-	#pragma message("no hay ft_ft")
-#endif
-
-#ifdef FT_ULTIMATE_FT
-TEST(ft_ultimate_ft_test, test2)
-{
-
-    	int num = 0;
-    	int* ptr1 = &num;
-    	int** ptr2 = &ptr1;
-    	int*** ptr3 = &ptr2;
+		if (test == 42)
+		{
+			std::cout << "\tTest 1: ";
+			OK("OK");
+		}
+		else
+		{
+			std::cout << "\tTest 1: ";
+			KO("KO");
+			std::cout << "\tSe esperaba: 42\n" << "\tSe recibio: " << test << std::endl;
+		}
+	#else
+		#pragma message("no hay ft_ft")
+	#endif
+	#ifdef FT_ULTIMATE_FT
+		bold("ft_ultimate_ft");
+		int num = 0;
+		int* ptr1 = &num;
+		int** ptr2 = &ptr1;
+		int*** ptr3 = &ptr2;
 		int**** ptr4 = &ptr3;
 		int***** ptr5 = &ptr4;
 		int****** ptr6 = &ptr5;
 		int******* ptr7 = &ptr6;
 		int******** ptr8 = &ptr7;
 		ft_ultimate_ft(&ptr8);
-		EXPECT_EQ(num, 42);
-}
-#else
-		#pragma message("No hay ft_ultimate_ft")
-#endif
+		if (num == 42)
+		{
+			std::cout << "\tTest 1: ";
+			OK("OK");
+		}
+		else
+		{
+			std::cout << "\tTest 1: ";
+			KO("KO");
+			std::cout << "\tSe esperaba: 42\n" << "\tSe recibio: " << num << std::endl;
+		}
+	#else
+			#pragma message("No hay ft_ultimate_ft")
+	#endif
 
-#ifdef FT_SWAP
-TEST(ft_swap_test, test3)
-{
-	int a = 2;
-	int b = -1;
+	#ifdef FT_SWAP
+		bold("ft_swap");
+		int aa = 2;
+		int bb = -1;
+		
+		ft_swap(&aa, &bb);
+		if (aa == -1 && bb == 2)
+		{
+			std::cout << "\tTest 1: ";
+			OK("OK");
+		}
+		else
+		{
+			std::cout << "\tTest 1: ";
+			KO("KO");
+			std::cout << "\tA: Se esperaba: -1" << "\tSe recibio: " << aa << std::endl;
+			std::cout << "\tB: Se esperaba: 2" << "\tSe recibio: " << bb << std::endl;
+		}
+	#else 
+		#pragma message("No hay ft_swap")
+	#endif
 	
-	ft_swap(&a, &b);
-	EXPECT_EQ(a, -1);
-	EXPECT_EQ(b, 2);
-}
-#else 
-	#pragma message("No hay ft_swap")
-#endif
-
-#ifdef FT_DIV_MOD
-TEST(ft_div_mod_test, 4_entre_2)
-{
+	#ifdef FT_DIV_MOD
+	bold("ft_div_mod");
 	int a = 4;
 	int b = 2;
 	int div = -1;
 	int mod = -1;
 
 	ft_div_mod(a, b, &div, &mod);
-	EXPECT_EQ(div, 2);
-	EXPECT_EQ(mod, 0);
-}
-
-TEST(ft_div_mod_test, 5_entre_2)
-{
-	int a = 5;
-	int b = 2;
-	int div = -1;
-	int mod = -1;
+	if (div == 2 && mod == 0)
+	{
+		std::cout << "\tTest 1: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 1: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: -1" << "\tSe recibio: " << div << std::endl;
+		std::cout << "\tMod: Se esperaba: 2" << "\tSe recibio: " << mod << std::endl;
+	}
+	a = 5;
+	b = 2;
+	ft_div_mod(a, b, &div, &mod);
+	if (div == 2 && mod == 1)
+	{
+		std::cout << "\tTest 2: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 2: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: -1" << "\tSe recibio: " << div << std::endl;
+		std::cout << "\tMod: Se esperaba: 2" << "\tSe recibio: " << mod << std::endl;
+	}
+	a = INT_MAX;
+	b = 2;
 
 	ft_div_mod(a, b, &div, &mod);
-	EXPECT_EQ(div, 2);
-	EXPECT_EQ(mod, 1);
-}
-
-TEST(ft_div_mod_test, INT_MAX_entre_2)
-{
-	int a = INT_MAX;
-	int b = 2;
-	int div = -1;
-	int mod = -1;
-
-	ft_div_mod(a, b, &div, &mod);
-	EXPECT_EQ(div, INT_MAX/2);
-	EXPECT_EQ(mod, INT_MAX%2);
-}
-
-TEST(ft_div_mod_test, INT_MIN_entre_2)
-{
-	int a = INT_MIN;
-	int b = 2;
-	int div = -1;
-	int mod = -1;
+	if (div == INT_MAX/2 && mod == INT_MAX%2)
+	{
+		std::cout << "\tTest 3: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 3: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: " << INT_MAX/2 << "\tSe recibio: " << div << std::endl;
+		std::cout << "\tMod: Se esperaba: " << INT_MAX%2 << "\tSe recibio: " << mod << std::endl;
+	}
+	a = INT_MIN;
+	b = 2;
 
 	ft_div_mod(a, b, &div, &mod);
-	EXPECT_EQ(div, INT_MIN/2);
-	EXPECT_EQ(mod, INT_MIN%2);
+	if (div == INT_MIN/2 && mod == INT_MIN%2)
+	{
+		std::cout << "\tTest 4: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 4: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: " << INT_MIN/2 << "\tSe recibio: " << div << std::endl;
+		std::cout << "\tMod: Se esperaba: " << INT_MIN%2 << "\tSe recibio: " << mod << std::endl;
+	}
+	#else
+		#pragma message("No hay ft_div_mod")
+	#endif
+
+
+	#ifdef FT_ULTIMATE_DIV_MOD
+	bold("ft_ultimate_div_mod");
+	int aaa = 4;
+	int bbb = 2;
+
+	ft_ultimate_div_mod(&aaa, &bbb);
+	if (aaa == 2 && bbb == 0)
+	{
+		std::cout << "\tTest 1: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 1: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: -1" << "\tSe recibio: " << aaa << std::endl;
+		std::cout << "\tMod: Se esperaba: 2" << "\tSe recibio: " << bbb << std::endl;
+	}
+	aaa = 5;
+	bbb = 2;
+	ft_ultimate_div_mod(&aaa, &bbb);
+	if (aaa == 2 && bbb == 1)
+	{
+		std::cout << "\tTest 2: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 2: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: -1" << "\tSe recibio: " << aaa << std::endl;
+		std::cout << "\tMod: Se esperaba: 2" << "\tSe recibio: " << bbb << std::endl;
+	}
+	aaa = INT_MAX;
+	bbb = 2;
+
+	ft_ultimate_div_mod(&aaa, &bbb);
+	if (aaa == INT_MAX/2 && bbb == INT_MAX%2)
+	{
+		std::cout << "\tTest 3: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 3: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: " << INT_MAX/2 << "\tSe recibio: " << aaa << std::endl;
+		std::cout << "\tMod: Se esperaba: " << INT_MAX%2 << "\tSe recibio: " << bbb << std::endl;
+	}
+	aaa = INT_MIN;
+	bbb = 2;
+
+	ft_ultimate_div_mod(&aaa, &bbb);
+	if (aaa == INT_MIN/2 && bbb == INT_MIN%2)
+	{
+		std::cout << "\tTest 4: ";
+		OK("OK");
+	}
+	else
+	{
+		std::cout << "\tTest 4: ";
+		KO("KO");
+		std::cout << "\tDiv: Se esperaba: " << INT_MIN/2 << "\tSe recibio: " << aaa << std::endl;
+		std::cout << "\tMod: Se esperaba: " << INT_MIN%2 << "\tSe recibio: " << bbb << std::endl;
+	}
+	#else
+		#pragma message("No hay ft_ultimate_div_mod")
+	#endif
 }
-#else
-	#pragma message("No hay ft_div_mod")
-#endif
-#ifdef FT_ULTIMATE_DIV_MOD
-TEST(ft_ultimate_div_mod_test, 4_entre_2)
-{
-	int a = 4;
-	int b = 2;
-
-	ft_ultimate_div_mod(&a, &b);
-	EXPECT_EQ(a, 2);
-	EXPECT_EQ(b, 0);
-}
-
-TEST(ft_ultimate_div_mod_test, 5_entre_2)
-{
-	int a = 5;
-	int b = 2;
-
-	ft_ultimate_div_mod(&a, &b);
-	EXPECT_EQ(a, 2);
-	EXPECT_EQ(b, 1);
-}
-
-TEST(ft_ultimate_div_mod_test, INT_MAX_entre_2)
-{
-	int a = INT_MAX;
-	int b = 2;
-
-	ft_ultimate_div_mod(&a, &b);
-	EXPECT_EQ(a, INT_MAX/2);
-	EXPECT_EQ(b, INT_MAX%2);
-}
-
-TEST(ft_ultimate_div_mod_test, INT_MIN_entre_2)
-{
-	int a = INT_MIN;
-	int b = 2;
-
-	ft_ultimate_div_mod(&a, &b);
-	EXPECT_EQ(a, INT_MIN/2);
-	EXPECT_EQ(b, INT_MIN%2);
-}
-#else
-	#pragma message("No hay ft_ultimate_div_mod")
-#endif
-
-
