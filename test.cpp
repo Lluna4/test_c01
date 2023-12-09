@@ -20,10 +20,6 @@
 #define FT_ULTIMATE_DIV_MOD
 #endif
 
-
-#define INT_MAX 2147483647
-#define INT_MIN -2147483648
-
 template<typename T>
 void bold(T value)
 {
