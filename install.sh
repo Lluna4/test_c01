@@ -16,7 +16,7 @@ if [ -z "$path" ]; then
     exit 1
 fi
 
-executable_path="$path/test_c01"
+executable_path="$path/test_c01/a.out"
 
 if ! grep -q "alias test_c01=" $HOME/.bash_profile; then
     echo "alias test_c01=\"$executable_path\"" >> $HOME/.bash_profile
