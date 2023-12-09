@@ -10,18 +10,18 @@ cd test_c01
 
 g++ manager.cpp -std=c++17
 
-path=$(realpath a.out)
+path="$(cd "$(dirname "$0")"; pwd -P)"
 if [ -z "$path" ]; then
     echo "path is not set or is empty"
     exit 1
 fi
 
-if ! grep -q "alias test_c01=" $HOME/.bashrc; then
-    echo "alias test_c01=\"$path\"" >> $HOME/.bashrc
+if ! grep -q "alias test_c01=" $HOME/.bash_profile; then
+    echo "alias test_c01=\"$path\"" >> $HOME/.bash_profile
 fi
 
-if ! grep -q ".bashrc" $HOME/.bash_profile; then
-    echo "source $HOME/.bashrc" >> $HOME/.bash_profile
+if ! grep -q ".bash_profile" $HOME/.bash_profile; then
+    echo "source $HOME/.bash_profile" >> $HOME/.bash_profile
 fi
 
 echo "For this command to work close and open the terminal"
