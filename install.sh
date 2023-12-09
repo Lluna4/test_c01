@@ -8,7 +8,7 @@ REPO_URL="https://github.com/Lluna4/test_c01"
 git clone $REPO_URL test_c01
 cd test_c01
 
-g++ manager.cpp -std=c++20
+g++ manager.cpp -std=c++17
 
 path=$(realpath a.out)
 if [ -z "$path" ]; then
